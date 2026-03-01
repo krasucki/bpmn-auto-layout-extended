@@ -70,6 +70,24 @@
         <di:waypoint x="425" y="70" />
         <di:waypoint x="507" y="70" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0mj2l3x_di" bpmnElement="DataInputAssociation_0mj2l3x">
+        <di:waypoint x="75" y="185" />
+        <di:waypoint x="75" y="147.5" />
+        <di:waypoint x="225" y="147.5" />
+        <di:waypoint x="225" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1w3k5cq_di" bpmnElement="DataOutputAssociation_1w3k5cq">
+        <di:waypoint x="225" y="110" />
+        <di:waypoint x="225" y="217.5" />
+        <di:waypoint x="75" y="217.5" />
+        <di:waypoint x="75" y="325" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1jjpwt9_di" bpmnElement="DataInputAssociation_1jjpwt9">
+        <di:waypoint x="75" y="325" />
+        <di:waypoint x="75" y="217.5" />
+        <di:waypoint x="375" y="217.5" />
+        <di:waypoint x="375" y="110" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
