@@ -1,10 +1,10 @@
-# bpmn-auto-layout
+# bpmn-auto-layout-extended
 
-[![CI](https://github.com/bpmn-io/bpmn-auto-layout/actions/workflows/CI.yml/badge.svg)](https://github.com/bpmn-io/bpmn-auto-layout/actions/workflows/CI.yml)
+[![CI](https://github.com/krasucki/bpmn-auto-layout-extended/actions/workflows/CI.yml/badge.svg)](https://github.com/krasucki/bpmn-auto-layout-extended/actions/workflows/CI.yml)
+
+Extended fork of [bpmn-auto-layout](https://github.com/bpmn-io/bpmn-auto-layout) with support for collaborations, message flows, text annotations, groups, and sub-process expansion.
 
 Create and layout the graphical representation of a BPMN diagram.
-
-Try it out in [the example project](https://bpmn-io.github.io/bpmn-auto-layout/).
 
 ## Usage
 
@@ -30,7 +30,7 @@ await layoutProcess(diagramXML, options);
 |---|---|---|---|
 | `expandSubProcesses` | `boolean` | `false` | Expand all sub-processes inline instead of leaving them collapsed |
 
-## What this fork adds (branch: `limitations-fixes`)
+## What this fork adds
 
 * **All participants laid out** — all participants in a collaboration are positioned, not just the first.
 * **Message flows** — message flows between participants are routed as orthogonal edges.
