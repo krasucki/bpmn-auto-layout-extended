@@ -26,21 +26,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bpmn-io/bpmn-auto-layout.git"
+    "url": "git+https://github.com/krasucki/bpmn-auto-layout-extended.git"
   },
   "keywords": [
     "bpmn",
     "layout"
   ],
-  "author": {
-    "name": "bpmn.io contributors",
-    "url": "https://github.com/bpmn-io"
-  },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bpmn-io/bpmn-auto-layout/issues"
+    "url": "https://github.com/krasucki/bpmn-auto-layout-extended/issues"
   },
-  "homepage": "https://github.com/bpmn-io/bpmn-auto-layout#readme",
+  "homepage": "https://github.com/krasucki/bpmn-auto-layout-extended#readme",
   "dependencies": {
     "bpmn-moddle": "^10.0.0",
     "min-dash": "^5.0.0"
