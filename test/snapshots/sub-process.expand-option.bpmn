@@ -45,23 +45,6 @@
         <di:waypoint x="275" y="70" />
         <di:waypoint x="357" y="70" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="SubStart_1_di" bpmnElement="SubStart_1">
-        <dc:Bounds x="57" y="52" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubTask_1_di" bpmnElement="SubTask_1">
-        <dc:Bounds x="175" y="30" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubEnd_1_di" bpmnElement="SubEnd_1">
-        <dc:Bounds x="357" y="52" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SubFlow_1_di" bpmnElement="SubFlow_1">
-        <di:waypoint x="93" y="70" />
-        <di:waypoint x="175" y="70" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SubFlow_2_di" bpmnElement="SubFlow_2">
-        <di:waypoint x="275" y="70" />
-        <di:waypoint x="357" y="70" />
-      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
