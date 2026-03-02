@@ -34,9 +34,13 @@ describe('Layout', function() {
 
         // given
         const xml = fs.readFileSync(path.join(fixturesDirectory, fileName), 'utf8');
+        const optionsFile = path.join(fixturesDirectory, fileName + '.options.json');
+        const options = fs.existsSync(optionsFile)
+          ? JSON.parse(fs.readFileSync(optionsFile, 'utf8'))
+          : {};
 
         // when
-        const output = await layoutProcess(xml);
+        const output = await layoutProcess(xml, options);
 
         fs.writeFileSync(path.join(outputDirectory, fileName), output, 'utf8');
 
