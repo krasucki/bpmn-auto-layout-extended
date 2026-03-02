@@ -20,21 +20,24 @@ const diagramWithLayoutXML = await layoutProcess(diagramXML);
 console.log(diagramWithLayoutXML);
 ```
 
-## Limitations
+### Options
 
-* Sub-processes are laid out as collapsed sub-processes by default (use `expandSubProcesses` option to expand)
+```javascript
+await layoutProcess(diagramXML, options);
+```
 
-## Fixes in this fork (branch: `limitations-fixes`)
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `expandSubProcesses` | `boolean` | `false` | Expand all sub-processes inline instead of leaving them collapsed |
 
-This fork extends the upstream library with the following fixes:
+## What this fork adds (branch: `limitations-fixes`)
 
-* **All participants laid out** — upstream only laid out the first participant in a collaboration; all participants are now positioned.
-* **Message flows** — message flows between participants are routed and emitted as orthogonal edges.
-* **Text annotations and associations** — process-level and collaboration-level text annotations are now positioned above their associated element. Annotations with no association are silently skipped.
+* **All participants laid out** — all participants in a collaboration are positioned, not just the first.
+* **Message flows** — message flows between participants are routed as orthogonal edges.
+* **Text annotations and associations** — process-level and collaboration-level annotations are positioned above their associated element.
 * **Groups** — group shapes are emitted around their member elements.
-* **Collaboration-level artifacts** — text annotations attached to the collaboration (not a specific process) are now rendered correctly.
-* **Original participant gap preserved** — the gap between pool lanes from the input diagram is carried over to the output (capped at 100 px). Annotations are accommodated by expanding the pool height rather than pushing pools apart.
-* **Collapsed sub-process inner elements** — inner elements of a collapsed sub-process are no longer erroneously emitted into the parent plane.
+* **Original participant gap preserved** — the gap between pool lanes from the input is carried over (capped at 100 px); annotations are accommodated by expanding the pool height.
+* **Sub-process expand support** — collapsed sub-processes retain their inner layout so they can be expanded; use `expandSubProcesses: true` to expand them inline during layout.
 
 ## Resources
 
@@ -69,6 +72,13 @@ npm run test:update-snapshots
 ```
 
 Add new test cases to [`test/fixtures`](./test/fixtures) and they will be picked up automatically.
+
+To pass options to a fixture, create a sidecar `<fixture>.options.json` file next to it:
+
+```
+test/fixtures/my-diagram.bpmn
+test/fixtures/my-diagram.bpmn.options.json  ← { "expandSubProcesses": true }
+```
 
 ## License
 
