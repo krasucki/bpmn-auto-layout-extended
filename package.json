@@ -1,6 +1,6 @@
 {
   "name": "bpmn-auto-layout-extended",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Layout BPMN diagrams, generating missing DI information",
   "type": "module",
   "exports": {
