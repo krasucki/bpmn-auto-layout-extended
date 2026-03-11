@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" name="Release Process" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Dev" name="Developer">
+        <bpmn:flowNodeRef>Start_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Develop</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_FixBugs</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Tester" name="Tester">
+        <bpmn:flowNodeRef>Task_Test</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Pass</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Manager" name="Release Manager">
+        <bpmn:flowNodeRef>Task_Release</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_1" name="Project Initiated">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_Develop" name="Develop Features">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:incoming>Flow_Fix</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Test" name="Run Tests">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Pass" name="Tests OK?">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_No</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_FixBugs" name="Fix Bugs">
+      <bpmn:incoming>Flow_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_Fix</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Release" name="Deploy Release">
+      <bpmn:incoming>Flow_Yes</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="End_1" name="Released">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_1" targetRef="Task_Develop" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Develop" targetRef="Task_Test" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Test" targetRef="Gateway_Pass" />
+    <bpmn:sequenceFlow id="Flow_Yes" name="Yes" sourceRef="Gateway_Pass" targetRef="Task_Release" />
+    <bpmn:sequenceFlow id="Flow_No" name="No" sourceRef="Gateway_Pass" targetRef="Task_FixBugs" />
+    <bpmn:sequenceFlow id="Flow_Fix" sourceRef="Task_FixBugs" targetRef="Task_Develop" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Release" targetRef="End_1" />
+  </bpmn:process>
+  <bpmn:collaboration id="Collaboration_Process_1">
+    <bpmn:participant id="Participant_Process_1" name="Release Process" processRef="Process_1" />
+  </bpmn:collaboration>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration_Process_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_Collaboration_Process_1" bpmnElement="Collaboration_Process_1">
+      <bpmndi:BPMNShape id="Participant_Process_1_di" bpmnElement="Participant_Process_1" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="960" height="560" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Dev_di" bpmnElement="Lane_Dev" isHorizontal="true">
+        <dc:Bounds x="30" y="0" width="930" height="280" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Tester_di" bpmnElement="Lane_Tester" isHorizontal="true">
+        <dc:Bounds x="30" y="280" width="930" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Manager_di" bpmnElement="Lane_Manager" isHorizontal="true">
+        <dc:Bounds x="30" y="420" width="930" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_1_di" bpmnElement="Start_1">
+        <dc:Bounds x="117" y="52" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Develop_di" bpmnElement="Task_Develop">
+        <dc:Bounds x="235" y="30" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_FixBugs_di" bpmnElement="Task_FixBugs">
+        <dc:Bounds x="685" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Test_di" bpmnElement="Task_Test">
+        <dc:Bounds x="385" y="310" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Pass_di" bpmnElement="Gateway_Pass" isMarkerVisible="true">
+        <dc:Bounds x="560" y="325" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Release_di" bpmnElement="Task_Release">
+        <dc:Bounds x="685" y="450" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_1_di" bpmnElement="End_1">
+        <dc:Bounds x="867" y="472" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="153" y="70" />
+        <di:waypoint x="235" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="285" y="110" />
+        <di:waypoint x="285" y="350" />
+        <di:waypoint x="385" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Fix_di" bpmnElement="Flow_Fix">
+        <di:waypoint x="735" y="250" />
+        <di:waypoint x="735" y="280" />
+        <di:waypoint x="285" y="280" />
+        <di:waypoint x="285" y="110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="485" y="350" />
+        <di:waypoint x="560" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Yes_di" bpmnElement="Flow_Yes">
+        <di:waypoint x="585" y="375" />
+        <di:waypoint x="585" y="490" />
+        <di:waypoint x="685" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_No_di" bpmnElement="Flow_No">
+        <di:waypoint x="610" y="350" />
+        <di:waypoint x="735" y="350" />
+        <di:waypoint x="735" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="785" y="490" />
+        <di:waypoint x="867" y="490" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" name="Release Process" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Dev" name="Developer">
+        <bpmn:flowNodeRef>Start_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Develop</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_FixBugs</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Tester" name="Tester">
+        <bpmn:flowNodeRef>Task_Test</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Pass</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Manager" name="Release Manager">
+        <bpmn:flowNodeRef>Task_Release</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_1" name="Project Initiated">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_Develop" name="Develop Features">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:incoming>Flow_Fix</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Test" name="Run Tests">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Pass" name="Tests OK?">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_No</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_FixBugs" name="Fix Bugs">
+      <bpmn:incoming>Flow_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_Fix</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Release" name="Deploy Release">
+      <bpmn:incoming>Flow_Yes</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="End_1" name="Released">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start_1" targetRef="Task_Develop"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_Develop" targetRef="Task_Test"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_Test" targetRef="Gateway_Pass"/>
+    <bpmn:sequenceFlow id="Flow_Yes" name="Yes" sourceRef="Gateway_Pass" targetRef="Task_Release"/>
+    <bpmn:sequenceFlow id="Flow_No" name="No" sourceRef="Gateway_Pass" targetRef="Task_FixBugs"/>
+    <bpmn:sequenceFlow id="Flow_Fix" sourceRef="Task_FixBugs" targetRef="Task_Develop"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_Release" targetRef="End_1"/>
+  </bpmn:process>
+</bpmn:definitions>
