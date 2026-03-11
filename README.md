@@ -36,7 +36,7 @@ await layoutProcess(diagramXML, options);
 * **Message flows** — message flows between participants are routed as orthogonal edges.
 * **Text annotations and associations** — process-level and collaboration-level annotations are positioned above their associated element.
 * **Groups** — group shapes are emitted around their member elements.
-* **Lanes (swimlanes)** — when a process defines a `laneSet`, elements are reorganized into lane-specific row bands and `BPMNShape` DI entries are emitted for each lane. Elements not explicitly assigned to a lane are inferred from their connections.
+* **Lanes (swimlanes)** — when a process defines a `laneSet`, elements are reorganized into lane-specific row bands and `BPMNShape` DI entries are emitted for each lane. Works both inside collaborations and for standalone processes (a collaboration+participant wrapper is synthesized automatically). Elements not explicitly assigned to a lane are inferred from their connections.
 * **Original participant gap preserved** — the gap between pool lanes from the input is carried over (capped at 100 px); annotations are accommodated by expanding the pool height.
 * **Sub-process expand support** — collapsed sub-processes retain their inner layout so they can be expanded; use `expandSubProcesses: true` to expand them inline during layout.
 
